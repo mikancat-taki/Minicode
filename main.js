@@ -1,16 +1,28 @@
 const { app, BrowserWindow } = require('electron');
+const path = require('path');
 
 function createWindow() {
   const win = new BrowserWindow({
-    width: 1280,
+    width: 1200,
     height: 800,
     webPreferences: {
-      nodeIntegration: false,
+      nodeIntegration: true,
+      contextIsolation: false
     },
+    icon: path.join(__dirname, 'icon/icon.png') // 任意でアイコンを置く場合
   });
 
-  // あなたのWebアプリを表示
-  win.loadFile('index.html'); // ← React/Viteなどの場合はdist内を指定
+  // Minicode の index.html を読み込む
+  win.loadFile('index.html');
 }
 
-app.whenReady().then(createWindow);
+app.whenReady().then(() => {
+  createWindow();
+  app.on('activate', () => {
+    if (BrowserWindow.getAllWindows().length === 0) createWindow();
+  });
+});
+
+app.on('window-all-closed', () => {
+  if (process.platform !== 'darwin') app.quit();
+});
