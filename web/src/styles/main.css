@@ -1,0 +1,4 @@
+html,body,#root{height:100%;margin:0;}
+.theme-dark{background:#1e1e1e;color:#ddd;}
+.theme-light{background:#fff;color:#000;}
+*{box-sizing:border-box;}
