@@ -2,16 +2,14 @@
   "name": "vscode-clone",
   "version": "1.0.0",
   "private": true,
-  "main": "dist/electron/main.js",
+  "main": "main.js",
   "scripts": {
-    "dev": "concurrently \"npm:dev:web\" \"wait-on http://localhost:3000 && electron .\"",
-    "dev:web": "cd web && vite",
-    "start:web": "cd web && vite preview --port 3000",
-    "build:web": "cd web && vite build && cp -r web/dist ../dist-web || true",
-    "build": "npm run build:web && tsc -p tsconfig.json && mkdir -p dist/electron && cp -r web/dist dist/electron/renderer || true",
-    "build:installer": "echo 'Use Inno Setup to create installer from dist/electron'",
-    "rust:build": "cd rust-extension && wasm-pack build --target web --out-dir ../web/public/wasm || true",
-    "lint": "eslint . --ext .ts,.tsx || true"
+    "start": "electron-forge start",
+    "make": "electron-forge make",
+    "package": "electron-forge package",
+    "publish": "electron-forge publish"
+  }
+
   },
   "dependencies": {
     "monaco-editor": "^0.36.1"
