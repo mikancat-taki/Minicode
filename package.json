@@ -1,34 +1,50 @@
 {
   "name": "minicode",
   "version": "1.0.0",
-  "description": "Minicode Desktop version",
+  "description": "Minicode デスクトップ版 (Electron)",
   "main": "main.js",
   "scripts": {
-    "start": "electron-forge start",
+    "start": "electron .",
+    "dev": "electron .",
+    "build": "electron-builder",
     "package": "electron-forge package",
-    "make": "electron-forge make",
-    "publish": "electron-forge publish"
+    "make": "electron-forge make"
   },
-  "keywords": [],
   "author": "mikancat-taki",
   "license": "MIT",
-  "dependencies": {},
   "devDependencies": {
-    "@electron-forge/cli": "^7.0.0",
-    "@electron-forge/maker-squirrel": "^7.0.0",
-    "@electron-forge/maker-zip": "^7.0.0",
-    "electron": "^33.0.0"
+    "@electron-forge/cli": "^7.4.0",
+    "electron": "^31.0.0",
+    "electron-builder": "^25.0.0"
+  },
+  "dependencies": {
+    "path": "^0.12.7"
   },
   "config": {
     "forge": {
+      "packagerConfig": {
+        "icon": "./icon/icon"
+      },
       "makers": [
         {
           "name": "@electron-forge/maker-squirrel",
-          "config": {}
+          "config": {
+            "name": "minicode"
+          }
         },
         {
           "name": "@electron-forge/maker-zip",
-          "platforms": ["darwin", "linux", "win32"]
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
         }
       ]
     }
